@@ -2,42 +2,79 @@
 
 ## Project Overview
 
-This project simulates an enterprise IT support incident involving a user who cannot access Microsoft SharePoint. The investigation will use Microsoft Entra ID and Microsoft Intune to identify the cause, implement an appropriate resolution, and validate the result.
+This project documents a simulated enterprise access incident investigated using Microsoft Entra ID, Microsoft Intune, and a Windows 11 test VM.
+
+The investigation began with a browser certificate warning while accessing Microsoft 365. The work demonstrates evidence-based troubleshooting, identity sign-in log analysis, Windows service checks, and post-remediation validation.
 
 ## Incident Details
 
 - **Incident ID:** INC-1042
 - **Affected user:** MD102 Test User
-- **Affected service:** Microsoft SharePoint Online
-- **Reported issue:** The user can sign in to Windows but encounters an access restriction when attempting to access SharePoint.
-- **Initial hypothesis:** Device compliance, Conditional Access, or another authentication and authorisation issue may be involved.
-- **Status:** Investigation not yet completed
+- **Environment:** Windows 11 Enterprise test VM managed by Microsoft Intune
+- **Affected service:** Microsoft 365 / SharePoint Online
+- **Initial symptom:** Browser displayed `NET::ERR_CERT_DATE_INVALID` with the message “Your connection is not private.”
+- **Status:** Access restored; root cause not fully confirmed
 
-## Investigation Plan
+## Investigation
 
-1. Review the user's Microsoft Entra sign-in logs.
-2. Inspect the sign-in result and any Conditional Access evaluation details.
-3. Verify the device's Microsoft Entra join and Intune management status.
-4. Review the device compliance state and relevant compliance policies.
-5. Identify the evidence-supported root cause.
-6. Apply the appropriate corrective action, if required.
-7. Repeat the relevant access test and document the outcome.
+### 1. Microsoft Entra sign-in logs
 
-## Evidence and Findings
+The Entra sign-in logs contained successful events for the test user:
 
-Investigation findings, screenshots, root cause, remediation, and validation results will be added as the work is completed.
+- **Application:** Office 365 SharePoint Online
+- **Result:** Success
+- **Error code:** `0`
 
-## Security and Validation Notes
+A related SharePoint Web Client Extensibility event also showed a successful sign-in, with multifactor authentication indicated.
 
-Changes will be limited to those necessary to resolve the simulated incident. Existing tenant security controls will not be weakened simply to make access succeed.
+These results showed successful authentication for the recorded events. They did not, by themselves, prove that every SharePoint resource was accessible or that Conditional Access caused the original browser warning.
 
-The project will distinguish confirmed findings from hypotheses and will document any test limitations.
+### 2. Browser certificate warning
+
+The Windows 11 VM displayed:
+
+`NET::ERR_CERT_DATE_INVALID`
+
+This indicated a certificate date/validity problem from the browser's perspective. The Windows Time service was then found to be stopped.
+
+### 3. Remediation
+
+The Windows Time service was started using the Windows Services interface.
+
+After this action, the user reported that the environment was working again. The browser warning and access issue were therefore treated as resolved for the test.
+
+The available evidence suggests that Windows time synchronisation may have contributed to the certificate warning, but the precise cause was not conclusively verified with a recorded clock comparison or certificate inspection.
+
+### 4. Validation
+
+After the service was started, the user reported that the environment worked. A screenshot was saved as project evidence.
+
+## Evidence
+
+| Evidence | Description |
+|---|---|
+| [SharePoint access restored](Evidence/Project-02-01-SharePoint-Access-Restored.png) | Screenshot captured after the reported recovery |
+
+## Outcome
+
+- Reviewed Microsoft Entra sign-in events for the test user.
+- Identified successful SharePoint-related authentication events.
+- Investigated a browser TLS certificate date warning.
+- Found the Windows Time service stopped and started it.
+- Confirmed that the environment subsequently worked, based on user validation.
+
+## Lessons Learned
+
+- A browser certificate warning should not automatically be attributed to Conditional Access.
+- Successful authentication events do not guarantee access to every application resource.
+- System time is an important part of certificate validation.
+- Troubleshooting should use observable evidence and avoid claiming an unverified root cause.
 
 ## Skills Demonstrated
 
-- Microsoft Entra ID sign-in troubleshooting
-- Microsoft Intune device compliance
-- Conditional Access investigation
-- Endpoint identity and access troubleshooting
-- Root cause analysis
-- Technical documentation and evidence-based validation
+- Microsoft Entra ID sign-in log analysis
+- Windows 11 troubleshooting
+- Windows Time service investigation
+- TLS certificate error triage
+- Evidence-based remediation and validation
+- Technical incident documentation
