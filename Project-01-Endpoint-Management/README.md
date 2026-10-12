@@ -1,4 +1,4 @@
-# LAB-25 — Final Integrated Endpoint Management Scenario
+# Enterprise Windows Endpoint Management with Microsoft Intune
 
 ## Objective
 
