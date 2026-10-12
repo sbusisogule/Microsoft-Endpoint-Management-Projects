@@ -4,7 +4,7 @@ Hands-on IT administration projects demonstrating Microsoft Intune, Microsoft En
 
 ## About This Portfolio
 
-This portfolio showcases practical endpoint management and IT administration skills developed through hands-on implementation, configuration, troubleshooting, and testing in a Microsoft 365 lab environment.
+This portfolio showcases practical endpoint management and IT administration skills developed through hands on implementation, configuration, troubleshooting, and testing in a Microsoft 365 lab environment.
 
 The focus is on solving realistic IT problems, applying security controls, managing Windows devices, and documenting technical outcomes.
 
