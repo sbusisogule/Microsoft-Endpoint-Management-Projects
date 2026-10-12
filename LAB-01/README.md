@@ -1,3 +1,8 @@
+## Microsoft Entra ID — Administrative Units and Delegated Administration
+
+### Objective
+
+Create an administrative unit to organize IT-related identities and configure delegated administration using Microsoft Entra ID role assignments.
 ---
 
 ## Microsoft Entra ID — Administrative Units and Delegated Administration
