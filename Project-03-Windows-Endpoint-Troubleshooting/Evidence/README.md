@@ -1,17 +1,12 @@
-Project 3 Evidence
+## Evidence
 
-This folder contains supporting screenshots for the Windows 11 endpoint troubleshooting investigations documented in the main project README.
+The following screenshots support selected checks performed during the investigations.
 
-Evidence Index
+| Incident | Evidence |
+|---|---|
+| INC-301 — Windows Update | [Windows Update Status](Evidence/INC-301-Windows-Update-Status.png) |
+| INC-302 — Application Deployment | [7-Zip Installed](Evidence/INC-302-7Zip-Installed.png) |
+| INC-303 — Windows Time Service | [Windows Time Service](Evidence/INC-303-Windows-Time-Service.png) |
+| INC-304 — Endpoint Health | [System File Check](Evidence/INC-304-System-File-Check.png) |
 
-INC-301: Windows Update health investigation
-
-INC-302: Application deployment verification
-
-INC-303: Windows Time service investigation
-
-INC-304: Windows endpoint health check
-
-INC-305: Intune device management verification
-
-Screenshots will be added as they are captured and verified. This index does not imply that every screenshot is already available.
+See the [Evidence Index](Evidence/README.md) for the complete list of available screenshots.
